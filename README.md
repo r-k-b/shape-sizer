@@ -7,13 +7,15 @@ Intersecting areas are counted once only.
 
 
 
-# Notes
+# Notes / Todo
 
 Offline storage?
 
 Touch devices
 
+Resposive canvas element?
 
+databinding for live update
 
 [Integrating Fabricjs and Angularjs](http://stackoverflow.com/questions/18291838/integrating-fabricjs-and-angularjs)
 
