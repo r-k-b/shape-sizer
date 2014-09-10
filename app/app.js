@@ -15,6 +15,15 @@
 
         // "add" rectangle onto canvas
         shapeCanvas.add(rect);
+
+        // add listeners
+        var shapeModListener = function(options, event) {
+            console.log(options);
+        };
+        shapeCanvas.on('object:modified', shapeModListener);
+        shapeCanvas.on('object:moving', shapeModListener);
+        shapeCanvas.on('object:scaling', shapeModListener);
+        shapeCanvas.on('object:rotating', shapeModListener);
     };
     angular.element(document).ready(initFabric);
 
@@ -32,7 +41,8 @@
 
         this.area = 12;
         this.perimeter = 6;
-        this.quoteValue = 202;
+        this.costPerM2 = 50;
+        this.quoteValue = this.area * this.costPerM2;
 
         //noinspection JSUnusedGlobalSymbols
         this.canvasShapes = function() {
