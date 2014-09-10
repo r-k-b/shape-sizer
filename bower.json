@@ -17,8 +17,8 @@
   "dependencies": {
     "angularjs": "~1.2.24",
     "bootstrap": "~3.2.0",
-    "fabric": "~1.4.11"
+    "fabric": "~1.4.11",
+    "html5-boilerplate": "~4.3.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
