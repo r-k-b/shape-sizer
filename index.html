@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/app/app.css">
     <script src="/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/bower_components/html5-boilerplate/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="/bower_components/angularjs/angular.js"></script>
+    <script src="/bower_components/fabric/dist/fabric.js"></script>
+    <script src="/app/app.js"></script>
+
+    <script src="/bower_components/html5-boilerplate/js/plugins.js"></script>
 </head>
 <body ng-app="shapeSizer">
 <!--[if lt IE 7]>
@@ -37,20 +45,19 @@
                 <canvas id="c" width="470" height="300"></canvas>
             </div>
         </div>
-        <div class="col-md-6">
-            foo {{shapes.foo}} <br/>
+        <div class="col-md-6" >
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <p>Shapes Used: {{shapes.canvasShapes().length}}</p>
+                    <p>Area: {{shapes.area}}</p>
+                </div>
+            </div>
+
 
             <button type="button" class="btn btn-primary" ng-click="shapes.addRect()">Add Rectangle</button>
         </div>
     </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/bower_components/html5-boilerplate/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="/bower_components/angularjs/angular.js"></script>
-<script src="/bower_components/fabric/dist/fabric.js"></script>
-<script src="/app/app.js"></script>
-
-<script src="/bower_components/html5-boilerplate/js/plugins.js"></script>
 </body>
 </html>

@@ -16,10 +16,9 @@
         // "add" rectangle onto canvas
         shapeCanvas.add(rect);
     };
-    initFabric();
+    angular.element(document).ready(initFabric);
 
     var shapesCtrl = function () {
-        this.foo = 'bar';
         this.addRect = function() {
             var rect = new fabric.Rect({
                 left: 20,
@@ -28,9 +27,15 @@
                 width: 30,
                 height: 30
             });
-
             shapeCanvas.add(rect);
-        }
+        };
+
+        this.canvasShapes = function() {
+            if(typeof shapeCanvas !== 'undefined') {
+                return shapeCanvas.getObjects();
+            }
+            return [];
+        };
     };
 
     angular.module('shapeSizer', [])
