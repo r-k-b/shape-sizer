@@ -30,6 +30,11 @@
             shapeCanvas.add(rect);
         };
 
+        this.area = 12;
+        this.perimeter = 6;
+        this.quoteValue = 202;
+
+        //noinspection JSUnusedGlobalSymbols
         this.canvasShapes = function() {
             if(typeof shapeCanvas !== 'undefined') {
                 return shapeCanvas.getObjects();
