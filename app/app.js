@@ -1,12 +1,8 @@
 'use strict';
 (function () {
-
-    var shapesCtrl = function () {
-        this.foo = 'bar';
-    };
-
+    var shapeCanvas;
     var initFabric = function () {
-        var canvas = new fabric.Canvas('c');
+        shapeCanvas = new fabric.Canvas('c');
 
         // create a rectangle object
         var rect = new fabric.Rect({
@@ -18,9 +14,24 @@
         });
 
         // "add" rectangle onto canvas
-        canvas.add(rect);
+        shapeCanvas.add(rect);
     };
     initFabric();
+
+    var shapesCtrl = function () {
+        this.foo = 'bar';
+        this.addRect = function() {
+            var rect = new fabric.Rect({
+                left: 20,
+                top: 20,
+                fill: 'red',
+                width: 30,
+                height: 30
+            });
+
+            shapeCanvas.add(rect);
+        }
+    };
 
     angular.module('shapeSizer', [])
         .controller('shapesCtrl', shapesCtrl);
