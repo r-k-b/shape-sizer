@@ -1,6 +1,9 @@
 'use strict';
 (function () {
     var shapeCanvas;
+
+    var shapeModListener = function() {};
+
     var initFabric = function () {
         shapeCanvas = new fabric.Canvas('c');
 
@@ -8,7 +11,7 @@
         var rect = new fabric.Rect({
             left: 100,
             top: 100,
-            fill: 'grey',
+            fill: 'red',
             width: 40,
             height: 40
         });
@@ -16,19 +19,20 @@
         // "add" rectangle onto canvas
         shapeCanvas.add(rect);
 
+        // fire on load
+        shapeModListener();
+
         // add listeners
-        var shapeModListener = function(options, event) {
-            console.log(options);
-        };
         shapeCanvas.on('object:modified', shapeModListener);
-        shapeCanvas.on('object:moving', shapeModListener);
+        /*shapeCanvas.on('object:moving', shapeModListener);
         shapeCanvas.on('object:scaling', shapeModListener);
-        shapeCanvas.on('object:rotating', shapeModListener);
+        shapeCanvas.on('object:rotating', shapeModListener);*/
     };
     angular.element(document).ready(initFabric);
 
     var shapesCtrl = function () {
-        this.addRect = function() {
+        var vm = this;
+        vm.addRect = function() {
             var rect = new fabric.Rect({
                 left: 20,
                 top: 20,
@@ -39,17 +43,36 @@
             shapeCanvas.add(rect);
         };
 
-        this.area = 12;
-        this.perimeter = 6;
-        this.costPerM2 = 50;
-        this.quoteValue = this.area * this.costPerM2;
+        vm.area = 12;
+        vm.perimeter = 6;
+        vm.costPerM2 = .0050;
 
         //noinspection JSUnusedGlobalSymbols
-        this.canvasShapes = function() {
+        vm.canvasShapes = function() {
             if(typeof shapeCanvas !== 'undefined') {
                 return shapeCanvas.getObjects();
             }
-            return [];
+            return [null];
+        };
+
+        vm.calcPrice = function () {
+            return vm.area * vm.costPerM2;
+        };
+
+        shapeModListener = function(options, event) {
+            var area = 0,
+                perimeter = 0;
+            var getNewGeometry = function (value, key) {
+                area += value.currentHeight * value.currentWidth;
+                perimeter += value.currentHeight * 2 + value.currentWidth * 2;
+            };
+
+            angular.forEach(shapeCanvas.getObjects(), getNewGeometry);
+            vm.area = area;
+            vm.perimeter = perimeter;
+
+            var scope = angular.element(document.getElementById('c')).scope();
+            scope.$apply();
         };
     };
 
